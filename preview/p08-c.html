@@ -1,0 +1,25 @@
+<div class="stage" style="width:1920px;height:1080px;position:relative;background:#f5f5f7;overflow:hidden;">
+  <img src="img-s2/v2-Flash_高思考.jpg" style="position:absolute;inset:0;width:1920px;height:1080px;object-fit:contain;background:#fff;">
+  <div class="anim" data-in="0.1" data-dur="0.4" style="position:absolute;top:36px;left:44px;background:#1d1d1f;color:#fff;font-size:34px;font-weight:800;padding:14px 34px;border-radius:14px;box-shadow:0 8px 30px rgba(0,0,0,.35);letter-spacing:2px;">三号选手</div>
+</div><script>
+(function(){
+  function applySeek(t){
+    if(!isFinite(t)) t = 0;
+    if(t < 0) t = 0;
+    var els = document.querySelectorAll('.anim');
+    for(var i=0;i<els.length;i++){
+      var el = els[i];
+      var g0 = parseFloat(el.getAttribute('data-in')) || 0;
+      var dur = parseFloat(el.getAttribute('data-dur')) || 1;
+      if(dur <= 0) dur = 1;
+      var elapsed = t - g0;
+      if(elapsed < 0) elapsed = 0;
+      else if(elapsed > dur) elapsed = dur;
+      el.style.animationDuration = dur + 's';
+      el.style.animationDelay = '-' + elapsed + 's';
+    }
+  }
+  window.seek = applySeek;
+  applySeek(0);
+})();
+</script>

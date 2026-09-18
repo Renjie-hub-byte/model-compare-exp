@@ -1,0 +1,41 @@
+<div class="stage" style="width:1920px;height:1080px;background:#f5f5f7;position:relative;font-family:'PingFang SC','Microsoft YaHei',sans-serif;overflow:hidden;">
+  <style>
+    @keyframes popIn { 0%{transform:scale(0);opacity:0;} 70%{transform:scale(1.1);opacity:1;} 100%{transform:scale(1);opacity:1;} }
+    .cell{animation:popIn .4s cubic-bezier(.2,.9,.3,1.2) both;}
+  </style>
+  <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;">
+    <div style="display:flex;align-items:center;gap:60px;">
+      <div class="anim" data-in="0.1" data-dur="0.4" style="background:#1d1d1f;color:#fff;font-size:52px;font-weight:900;padding:26px 70px;border-radius:24px;box-shadow:0 16px 44px rgba(0,0,0,.3);">旗舰模型</div>
+      <div class="anim" data-in="0.5" data-dur="0.35" style="font-size:90px;font-weight:900;color:#ff3b30;font-style:italic;text-shadow:0 6px 0 rgba(255,59,48,.25);">VS</div>
+      <div class="anim" data-in="0.3" data-dur="0.4" style="background:#0071e3;color:#fff;font-size:52px;font-weight:900;padding:26px 70px;border-radius:24px;box-shadow:0 16px 44px rgba(0,113,227,.4);">闪电版</div>
+    </div>
+    <div class="anim" data-in="0.8" data-dur="0.35" style="font-size:44px;font-weight:900;color:#1d1d1f;letter-spacing:10px;">× 高思考 / 低思考 = 四位选手</div>
+    <div style="display:flex;gap:34px;">
+      <div class="cell anim" data-in="1.1" data-dur="0.35" style="width:360px;background:#fff;border-radius:24px;padding:34px;text-align:center;box-shadow:0 12px 36px rgba(0,0,0,.12);"><div style="font-size:26px;color:#86868b;font-weight:700;">旗舰 + 高思考</div><div style="font-size:60px;font-weight:900;color:#1d1d1f;margin-top:10px;">？</div></div>
+      <div class="cell anim" data-in="1.25" data-dur="0.35" style="width:360px;background:#fff;border-radius:24px;padding:34px;text-align:center;box-shadow:0 12px 36px rgba(0,0,0,.12);"><div style="font-size:26px;color:#86868b;font-weight:700;">闪电 + 高思考</div><div style="font-size:60px;font-weight:900;color:#1d1d1f;margin-top:10px;">？</div></div>
+      <div class="cell anim" data-in="1.4" data-dur="0.35" style="width:360px;background:#fff;border-radius:24px;padding:34px;text-align:center;box-shadow:0 12px 36px rgba(0,0,0,.12);"><div style="font-size:26px;color:#86868b;font-weight:700;">旗舰 + 低思考</div><div style="font-size:60px;font-weight:900;color:#1d1d1f;margin-top:10px;">？</div></div>
+      <div class="cell anim" data-in="1.55" data-dur="0.35" style="width:360px;background:#fff;border-radius:24px;padding:34px;text-align:center;box-shadow:0 12px 36px rgba(0,0,0,.12);"><div style="font-size:26px;color:#86868b;font-weight:700;">闪电 + 低思考</div><div style="font-size:60px;font-weight:900;color:#1d1d1f;margin-top:10px;">？</div></div>
+    </div>
+  </div>
+</div><script>
+(function(){
+  function applySeek(t){
+    if(!isFinite(t)) t = 0;
+    if(t < 0) t = 0;
+    var els = document.querySelectorAll('.anim');
+    for(var i=0;i<els.length;i++){
+      var el = els[i];
+      var g0 = parseFloat(el.getAttribute('data-in')) || 0;
+      var dur = parseFloat(el.getAttribute('data-dur')) || 1;
+      if(dur <= 0) dur = 1;
+      var elapsed = t - g0;
+      if(elapsed < 0) elapsed = 0;
+      else if(elapsed > dur) elapsed = dur;
+      el.style.animationDuration = dur + 's';
+      el.style.animationDelay = '-' + elapsed + 's';
+    }
+  }
+  window.seek = applySeek;
+  applySeek(0);
+})();
+</script>

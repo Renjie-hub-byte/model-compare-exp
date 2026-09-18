@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1920,height=1080">
+<title>scene:p14-summary type:bullet</title>
+<style>
+
+:root{
+  --bg-0:#0b0e14;
+  --bg-1:#151a24;
+  --ink:#eef2f8;
+  --ink-dim:#9aa7bd;
+  --accent:#5bd0ff;
+  --accent-2:#ffd479;
+  --line:rgba(255,255,255,.10);
+  --stage-w:1920px;
+  --stage-h:1080px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden}
+body{
+  background:#000;
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-system,
+    "Segoe UI",sans-serif;
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+  -webkit-text-size-adjust:none;
+}
+.stage{
+  position:relative;
+  width:var(--stage-w);
+  height:var(--stage-h);
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:
+    radial-gradient(1200px 700px at 50% -10%, var(--bg-1) 0%, var(--bg-0) 62%),
+    var(--bg-0);
+}
+
+/* 共享 keyframes：模板通过给对应 class 声明 animation-name 引用 */
+@keyframes rise{
+  0%{opacity:0; transform:translateY(46px)}
+  100%{opacity:1; transform:translateY(0)}
+}
+@keyframes fade{
+  0%{opacity:0}
+  100%{opacity:1}
+}
+@keyframes zoom{
+  0%{opacity:0; transform:scale(.93)}
+  100%{opacity:1; transform:scale(1)}
+}
+
+/* 所有被 seek 驱动的元素：暂停、双端填充、统一缓动 */
+.anim{
+  animation-play-state:paused;
+  animation-fill-mode:both;
+  animation-timing-function:cubic-bezier(.22,.61,.36,1);
+  will-change:transform,opacity;
+}
+
+/* m01 背景钩子：data-bg 背景层（.stage 之下首个全屏层，内容层在其上） */
+.stage{isolation:isolate}
+.bg-layer{position:absolute;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+/* m01 背景钩子：光斑类背景（paper/cream/aurora）—— 960x540 设计框等比铺满 */
+.bg-frame{position:absolute;left:0;top:0;width:960px;height:540px;overflow:hidden;transform:scale(2);transform-origin:0 0}
+.bg-tex{position:absolute;inset:0}
+.bg-blob{position:absolute;left:0;top:0;border-radius:50%;filter:blur(70px);opacity:.5}
+/* 纹理逐字对齐样张库④ .bg-paper / ⑤⑥ 内联背景 */
+.bg-paper-tex{background:repeating-linear-gradient(0deg,rgba(160,130,90,.05) 0 2px,transparent 2px 4px),repeating-linear-gradient(90deg,rgba(160,130,90,.04) 0 3px,transparent 3px 6px),linear-gradient(160deg,#f7f1e5,#efe4d0 60%,#e9dcc3)}
+.bg-cream-tex{background:linear-gradient(150deg,#fdf3ec,#f6e3e0 55%,#efe0ea)}
+.bg-aurora-tex{background:#0a0f24}
+.b-wrap{width:1560px;max-width:1560px;display:flex;flex-direction:column;
+  align-items:flex-start;}
+.b-kicker{font-size:34px;letter-spacing:8px;color:var(--accent);
+  text-transform:uppercase;margin:0 0 18px 6px;opacity:.9;}
+.b-title{font-size:92px;line-height:1.16;font-weight:700;margin:0 0 48px 0;}
+.b-title:empty{display:none}
+.b-list{list-style:none;margin:0;padding:0;width:100%;display:flex;
+  flex-direction:column;gap:26px;}
+.b-item{position:relative;display:flex;align-items:flex-start;gap:26px;
+  padding:20px 26px;background:rgba(255,255,255,.035);
+  border:1px solid var(--line);border-radius:14px;font-size:46px;line-height:1.45;}
+.b-num{flex:0 0 46px;height:46px;margin-top:8px;border-radius:8px;
+  background:rgba(255,255,255,.07);color:var(--accent);
+  display:flex;align-items:center;justify-content:center;font-size:26px;
+  font-weight:700;}
+.b-body{flex:1;min-width:0;}
+.b-item.is-hi{border-color:var(--accent);background:linear-gradient(90deg,
+  rgba(91,208,255,.14),rgba(91,208,255,.03));}
+.b-item.is-hi .b-num{background:var(--accent);color:#06121c;}
+.b-item.is-hi .b-body::before{content:"▸ ";color:var(--accent);}
+.b-kicker{animation-name:rise}
+.b-title{animation-name:zoom}
+.b-item{animation-name:rise}
+.b-item.b-more{opacity:.62;font-size:34px;border-style:dashed}
+
+:root{--bg-0:#F7F6F0;--bg-1:#EAF4EC;--ink:#2E4038;--ink-dim:#71857A;--accent:#27B07A;--accent-2:#F07E3B;--line:rgba(46,64,56,.14)}.stage{background:linear-gradient(168deg,#F6FBF5 0%,#EFF7F1 46%,#FBF3E9 100%)}.cp-panel{background:rgba(255,255,255,.58);box-shadow:0 18px 40px rgba(46,64,56,.08)}.cp-panel.is-a{border-color:rgba(39,176,122,.45)}.cp-panel.is-b{border-color:rgba(240,126,59,.45)}.cp-panel.is-a .cp-badge{color:#fff}.cp-panel.is-b .cp-badge{color:#fff}.g-track{background:rgba(255,255,255,.6)}.wgt-line{background:rgba(39,176,122,.07);border:1px solid rgba(39,176,122,.22)}.wg-idx{opacity:.9}
+</style>
+</head>
+<body>
+<div class="stage" data-scene-id="p14-summary" data-scene-type="bullet">
+<div class="bg-layer" data-bg="cream" aria-hidden="true">
+<div class="bg-frame">
+<div class="bg-tex bg-cream-tex"></div>
+<div class="bg-blob" style="width:300px;height:300px;background:rgba(244,183,196,.5)"></div>
+<div class="bg-blob" style="width:240px;height:240px;background:rgba(250,215,180,.55)"></div>
+</div>
+</div>
+<div class="b-wrap">
+<div class="b-kicker anim" data-in="0.0">要点</div>
+<h2 class="b-title anim" data-in="0.08" data-dur="0.5">保质保量三步法 · 直接抄</h2>
+<ul class="b-list">
+<li class="b-item anim" data-in="0.25" data-dur="0.42"><span class="b-num">1</span><span class="b-body">① 日常工作：闪电模型 + 低思考 · 一路莽</span></li>
+<li class="b-item anim" data-in="0.59" data-dur="0.42"><span class="b-num">2</span><span class="b-body">② 开局没想法：高思考拿计划 · 拿到切回低思考</span></li>
+<li class="b-item anim" data-in="0.93" data-dur="0.42"><span class="b-num">3</span><span class="b-body">③ 卡住了：让它总结重启 · 或者派子代理</span></li>
+</ul></div>
+</div>
+<script>
+
+(function(){
+  var SEEK_KEY = '--seek';
+  function applySeek(t){
+    if(!isFinite(t)) t = 0;
+    if(t < 0) t = 0;
+    var stage = document.querySelector('.stage');
+    if(stage) stage.style.setProperty(SEEK_KEY, String(t));
+    var els = document.querySelectorAll('.anim');
+    var i, el, g0, dur, elapsed;
+    for(i=0;i<els.length;i++){
+      el = els[i];
+      g0 = parseFloat(el.getAttribute('data-in')) || 0;
+      dur = parseFloat(el.getAttribute('data-dur')) || 1;
+      if(dur <= 0) dur = 1;
+      elapsed = t - g0;
+      if(elapsed < 0) elapsed = 0;
+      else if(elapsed > dur) elapsed = dur;
+      el.style.animationDuration = dur + 's';
+      el.style.animationDelay = '-' + elapsed + 's';
+    }
+  }
+  window.seek = applySeek;
+  applySeek(0);
+})();
+
+</script>
+<script>
+(function () {
+  var layer = document.querySelector('[data-bg="cream"]');
+  if (!layer) return;
+  var frameBox = layer.querySelector('.bg-frame');
+  if (!frameBox) return;
+  /* 漂移参数逐字对齐样张库 driftBlob(...)：[rx, ry, sp, ph, w, h]
+     （w/h 为样张光斑内联尺寸；父盒即 960x540 设计框常量，免布局测量） */
+  var PARAMS = [
+    [0.32, 0.26, 0.2, 1.0, 300, 300],
+    [0.28, 0.3, 0.16, 3.6, 240, 240]
+  ];
+  var els = layer.querySelectorAll('.bg-blob');
+  var blobs = [];
+  for (var i = 0; i < els.length && i < PARAMS.length; i++) {
+    blobs.push({ el: els[i], rx: PARAMS[i][0], ry: PARAMS[i][1],
+                 sp: PARAMS[i][2], ph: PARAMS[i][3], w: PARAMS[i][4], h: PARAMS[i][5] });
+  }
+  function frame(t) {
+    for (var i = 0; i < blobs.length; i++) {
+      var b = blobs[i];
+      var x = 960 * (.5 + b.rx * Math.sin(t * b.sp + b.ph)) - b.w / 2;
+      var y = 540 * (.5 + b.ry * Math.cos(t * b.sp * .8 + b.ph)) - b.h / 2;
+      b.el.style.transform = 'translate(' + x + 'px,' + y + 'px)';
+    }
+  }
+
+  /* seek(t) 挂载：先驱动既有 .anim 动画，再刷新背景帧；同 t 必得同画面 */
+  var prevSeek = window.seek;
+  window.seek = function (raw) {
+    var t = +raw;
+    if (!isFinite(t) || t < 0) t = 0;
+    if (typeof prevSeek === 'function') prevSeek(t);
+    frame(t);
+  };
+  frame(0);
+})();
+</script>
+</body>
+</html>
